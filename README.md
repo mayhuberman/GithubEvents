@@ -18,13 +18,14 @@
 On your terminal
 1. "docker build -t myapp-image ."
 2. "docker run -p 9090:8080 myapp-image"
-   Now you have the periodic task running in the background
+Now you have the periodic task running in the background
 
 # API Documentation
 1. GET "/events" -> json
 fetching all the data required in section 1 of the requirements
 On your terminal:  curl "http://localhost:9090/events"
 response example:
+```json
 {
    "actors":[
       "MrTuzki",
@@ -79,10 +80,12 @@ response example:
       "https://api.github.com/repos/davee8k/autoloader"
    ]
 }
+```
 3. GET "/repo-stars" -> json
 fetching all the data required in section 2 of the requirements
 On your terminal: curl "http://localhost:9090/repo-stars"
 response example:
+```json
 {
    "repoStars":[
       "https://api.github.com/repos/djprofessorkash/setlist: 0",
@@ -97,6 +100,7 @@ response example:
       "https://api.github.com/repos/joshka/junit-json-params: 49"
    ]
 }
+```
 
 # Project Structure
 - /clients/GithubClients: contains the method that interacts with Github's public API. It retrieves the events and returns a slice of the corresponding struct type.
