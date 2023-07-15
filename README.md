@@ -15,7 +15,7 @@
 - Use a database of your choosing to allow persistency, rather than keeping things in memory
 
 # How to run my app
-On your terminal <br />
+On your terminal from the project directory /src <br />
 1. "docker build -t myapp-image ."
 2. "docker run -p 9090:8080 myapp-image" <br />
 
