@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"githubEventsListener/handlers"
+	"githubEventsListener/clients"
+	"githubEventsListener/services"
 	"log"
 	"net/http"
 	"time"
@@ -13,8 +14,8 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// Register handlers for each API endpoint
-	mux.HandleFunc("/events", handler)
+	// Register clients for each API endpoint
+	mux.HandleFunc("/events", handlerEvents)
 	mux.HandleFunc("/repo-stars", handleReposStars)
 
 	err := http.ListenAndServe(":8080", mux)
@@ -27,17 +28,18 @@ func runBackgroundJob() {
 	for {
 		// Perform the background task
 		fmt.Println("Running a background job...")
-		handlers.ExtractData()
+		events := clients.GetEvents()
+		services.ExtractData(events)
 
 		// Sleep for 60 seconds
-		time.Sleep(300 * time.Second)
+		time.Sleep(60 * time.Second)
 	}
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	handlers.ReturnData(w)
+func handlerEvents(w http.ResponseWriter, r *http.Request) {
+	services.ReturnData(w)
 }
 
 func handleReposStars(w http.ResponseWriter, r *http.Request) {
-	handlers.ReturnReposStars(w)
+	services.ReturnReposStars(w)
 }

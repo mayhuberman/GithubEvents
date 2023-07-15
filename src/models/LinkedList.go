@@ -119,3 +119,8 @@ func (list *LinkedList) ConvertToSlice() []string {
 
 	return slice
 }
+
+func NewLinkedList(data interface{}) *LinkedList {
+	head := &Node{data: data, next: nil}
+	return &LinkedList{head: head}
+}

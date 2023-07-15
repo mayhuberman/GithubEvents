@@ -1,9 +1,10 @@
-package handlers
+package services
 
 import (
 	"encoding/json"
 	"fmt"
 	"githubEventsListener/models"
+	"githubEventsListener/utils"
 	"io"
 	"log"
 	"net/http"
@@ -29,7 +30,7 @@ func ReturnData(w http.ResponseWriter) {
 		"EventTypes": EventTypes,
 		"actors":     ActorsList.ConvertToSlice(),
 		"urls":       UrlsList.ConvertToSlice(),
-		"Emails":     getMapKeys(Emails),
+		"Emails":     utils.GetMapKeys(Emails),
 	}
 
 	err := json.NewEncoder(w).Encode(data)
@@ -116,14 +117,6 @@ func ExtractData(events []models.Event) {
 		}
 		UrlsList.Append(url)
 	}
-
-	println("***************************************************************************")
-	ActorsList.Print()
-	println("***************************************************************************")
-	println("events length: ", len(events))
-	println("EventTypes: ", EventTypes)
-	println("***************************************************************************")
-	UrlsList.Print()
 }
 
 func getRepoStars(urlsList models.LinkedList) models.UrlStarsSlice {

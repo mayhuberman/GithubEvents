@@ -1,4 +1,4 @@
-package handlers
+package clients
 
 import (
 	"encoding/json"
@@ -9,6 +9,7 @@ import (
 )
 
 func GetEvents() []models.Event {
+	log.Println("Getting events from Github API")
 	url := "https://api.github.com/events"
 
 	req, err := http.NewRequest("GET", url, nil)

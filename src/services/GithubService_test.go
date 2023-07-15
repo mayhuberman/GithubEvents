@@ -1,4 +1,4 @@
-package handlers
+package services
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ var expectedEmails = map[string]bool{
 var expectedActor = "mock2"
 var expectedUrl = "url2"
 
-func TestSimple(t *testing.T) {
+func TestHappyFlow(t *testing.T) {
 	ActorsSize = 1
 	UrlsSize = 1
 

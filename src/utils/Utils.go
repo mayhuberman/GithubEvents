@@ -1,6 +1,6 @@
-package handlers
+package utils
 
-func getMapKeys(m map[string]bool) []string {
+func GetMapKeys(m map[string]bool) []string {
 	keys := make([]string, 0, len(m))
 	for key := range m {
 		keys = append(keys, key)
