@@ -111,4 +111,5 @@ response example:
 - Dockerfile: This file contains the instructions for building a Docker image. It specifies the commands that users can run on the command line to assemble the image.
 - go.mod: This file defines the module's path and specifies its dependencies.
 - main: This file contains the main entry point of the application. It runs the periodic task and listens to the APIs, coordinating the different components of the project.
+- /services/GithubService_test - contains test to main logic.
 
