@@ -10,26 +10,26 @@ import (
 	"sort"
 )
 
-var eventTypes = make(map[string]int)
+var EventTypes = make(map[string]int)
 
-var actorsList models.LinkedList
+var ActorsList models.LinkedList
 var actorsMap = make(map[string]int)
-var actorsSize = 10
+var ActorsSize = 50
 
-var urlsList models.LinkedList
-var urlsSize = 10
+var UrlsList models.LinkedList
+var UrlsSize = 20
 
-var emails = make(map[string]bool)
+var Emails = make(map[string]bool)
 
 func ReturnData(w http.ResponseWriter) {
 	// Set response content type to JSON
 	w.Header().Set("Content-Type", "application/json")
 
 	data := map[string]interface{}{
-		"eventTypes": eventTypes,
-		"actors":     actorsList.ConvertToSlice(),
-		"urls":       urlsList.ConvertToSlice(),
-		"emails":     getMapKeys(emails),
+		"EventTypes": EventTypes,
+		"actors":     ActorsList.ConvertToSlice(),
+		"urls":       UrlsList.ConvertToSlice(),
+		"Emails":     getMapKeys(Emails),
 	}
 
 	err := json.NewEncoder(w).Encode(data)
@@ -43,7 +43,7 @@ func ReturnReposStars(w http.ResponseWriter) {
 	// Set response content type to JSON
 	w.Header().Set("Content-Type", "application/json")
 
-	repoStars := getRepoStars(urlsList) // change implementation of getRepoStars
+	repoStars := getRepoStars(UrlsList) // change implementation of getRepoStars
 
 	data := map[string]interface{}{
 		"repoStars": repoStars.ConvertUrlStarsToStrings(),
@@ -56,25 +56,24 @@ func ReturnReposStars(w http.ResponseWriter) {
 	}
 }
 
-func ExtractData() {
-	events := GetEvents()
+func ExtractData(events []models.Event) {
 	index := 0
 
 	for _, event := range events {
 
-		eventTypes[event.Type] = eventTypes[event.Type] + 1
+		EventTypes[event.Type] = EventTypes[event.Type] + 1
 
 		var commits = event.Payload.Commits
 		for _, commit := range commits {
 			if commit.Author.Email != "" {
-				emails[commit.Author.Email] = true
+				Emails[commit.Author.Email] = true
 			}
 		}
 
 		actorName := event.Actor.Login
-		if actorsList.Size() < actorsSize {
-			if !actorsList.Search(actorName) {
-				actorsList.Append(actorName)
+		if ActorsList.Size() < ActorsSize {
+			if !ActorsList.Search(actorName) {
+				ActorsList.Append(actorName)
 				actorsMap[actorName] = index
 				index = index + 1
 			} else {
@@ -87,10 +86,10 @@ func ExtractData() {
 				}
 			}
 		} else {
-			if !actorsList.Search(actorName) {
+			if !ActorsList.Search(actorName) {
 				for key, value := range actorsMap {
 					if value == 0 {
-						actorsList.Detach(key)
+						ActorsList.Detach(key)
 						delete(actorsMap, key)
 						break
 					}
@@ -98,11 +97,11 @@ func ExtractData() {
 				for key, value := range actorsMap {
 					actorsMap[key] = value - 1
 				}
-				actorsList.Append(actorName)
-				actorsMap[actorName] = actorsSize - 1
+				ActorsList.Append(actorName)
+				actorsMap[actorName] = ActorsSize - 1
 			} else {
 				currIndex := actorsMap[actorName]
-				actorsMap[actorName] = actorsSize - 1
+				actorsMap[actorName] = ActorsSize - 1
 				for key, value := range actorsMap {
 					if value > currIndex && key != actorName {
 						actorsMap[key] = value - 1
@@ -112,19 +111,19 @@ func ExtractData() {
 		}
 
 		url := event.Repo.URL
-		if urlsList.Size() >= urlsSize {
-			urlsList.DetachHead()
+		if UrlsList.Size() >= UrlsSize {
+			UrlsList.DetachHead()
 		}
-		urlsList.Append(url)
+		UrlsList.Append(url)
 	}
 
 	println("***************************************************************************")
-	actorsList.Print()
+	ActorsList.Print()
 	println("***************************************************************************")
 	println("events length: ", len(events))
-	println("eventTypes: ", eventTypes)
+	println("EventTypes: ", EventTypes)
 	println("***************************************************************************")
-	urlsList.Print()
+	UrlsList.Print()
 }
 
 func getRepoStars(urlsList models.LinkedList) models.UrlStarsSlice {

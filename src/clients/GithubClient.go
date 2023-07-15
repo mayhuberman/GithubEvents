@@ -17,7 +17,7 @@ func GetEvents() []models.Event {
 		return nil
 	}
 
-	req.Header.Set("Authorization", "Bearer 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")
+	req.Header.Set("Authorization", "Bearer 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")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
