@@ -44,7 +44,7 @@ func ReturnReposStars(w http.ResponseWriter) {
 	// Set response content type to JSON
 	w.Header().Set("Content-Type", "application/json")
 
-	repoStars := getRepoStars(UrlsList) // change implementation of getRepoStars
+	repoStars := getRepoStars(UrlsList)
 
 	data := map[string]interface{}{
 		"repoStars": repoStars.ConvertUrlStarsToStrings(),
@@ -58,6 +58,8 @@ func ReturnReposStars(w http.ResponseWriter) {
 }
 
 func ExtractData(events []models.Event) {
+	log.Println("Extracting data from Github events")
+
 	index := 0
 
 	for _, event := range events {
@@ -120,6 +122,8 @@ func ExtractData(events []models.Event) {
 }
 
 func getRepoStars(urlsList models.LinkedList) models.UrlStarsSlice {
+	log.Println("Getting repo stars from Github API")
+
 	var urlsStars []models.UrlStars
 
 	for urlsList.Size() > 0 {
