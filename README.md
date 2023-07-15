@@ -18,11 +18,11 @@
 On your terminal
 1. "docker build -t myapp-image ."
 2. "docker run -p 9090:8080 myapp-image"
-now you have the periodically task running in the backround
+   Now you have the periodic task running in the background
 
 # API Documentation
 1. GET "/events" -> json
-fetching all the data required on section 1 of requirements
+fetching all the data required in section 1 of the requirements
 On your terminal:  curl "http://localhost:9090/events"
 response example:
 {
@@ -80,7 +80,7 @@ response example:
    ]
 }
 3. GET "/repo-stars" -> json
-fetching all the data required on section 2 of requirements
+fetching all the data required in section 2 of the requirements
 On your terminal: curl "http://localhost:9090/repo-stars"
 response example:
 {
@@ -99,4 +99,11 @@ response example:
 }
 
 # Project Structure
+- /clients/GithubClients: contains the method that interacts with Github's public API. It retrieves the events and returns a slice of the corresponding struct type.
+- /services/GithubService: includes methods responsible for extracting the desired data from the events slice. It also contains methods that return the data in JSON format.
+- /models: This package holds all the data types used in the project, defining the structure and properties of the data.
+- /utils/Utils: contains utility methods used throughout the project, providing various helper functionalities.
+- Dockerfile: This file contains the instructions for building a Docker image. It specifies the commands that users can run on the command line to assemble the image.
+- go.mod: This file defines the module's path and specifies its dependencies.
+- main: This file contains the main entry point of the application. It runs the periodic task and listens to the APIs, coordinating the different components of the project.
 
