@@ -23,7 +23,7 @@ now you have the periodically task running in the backround
 # API Documentation
 1. GET "/events" -> json
 fetching all the data required on section 1 of requirements
-On your terminal: curl "http://localhost:8080/events"
+On your terminal:  curl "http://localhost:9090/events"
 response example:
 {
    "actors":[
@@ -81,7 +81,7 @@ response example:
 }
 3. GET "/repo-stars" -> json
 fetching all the data required on section 2 of requirements
-On your terminal: curl "http://localhost:8080/repo-stars"
+On your terminal: curl "http://localhost:9090/repo-stars"
 response example:
 {
    "repoStars":[
