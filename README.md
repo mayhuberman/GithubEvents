@@ -7,7 +7,7 @@
       - Actor: Unique name of the actor. You are required to store the last 50 actors.
       - Repo URLs: you are required to store the last 20 repository URLs that you came across. 
       - Emails: You are required to store all of the unique email addresses that you come across
-  - You should support retrieval of the data that you have collected either through API endpoints that your solution will expose, and that will return the collected data in JSON format, or by building a minimalistic web UI that will display it. You are free to choose between the two methods.
+  - You should support retrieval of the data that you have collected either through API endpoints that your solution will expose, and that will return the collected data in JSON format, or by building a minimalistic web UI that will display it. You are free to choose between the two methods. <br />
   2.In addition, you are required to support on-demand querying for the amount of stars per repository that you stored, and to return a list of repositories sorted by the amount of stars they have
 
 # Bonus parts
@@ -15,15 +15,15 @@
 - Use a database of your choosing to allow persistency, rather than keeping things in memory
 
 # How to run my app
-On your terminal
+On your terminal <br />
 1. "docker build -t myapp-image ."
-2. "docker run -p 9090:8080 myapp-image"
+2. "docker run -p 9090:8080 myapp-image" <br />
 Now you have the periodic task running in the background
 
 # API Documentation
-1. GET "/events" -> json
-fetching all the data required in section 1 of the requirements
-On your terminal:  curl "http://localhost:9090/events"
+1. GET "/events" -> json <br />
+fetching all the data required in section 1 of the requirements <br />
+On your terminal:  curl "http://localhost:9090/events" <br />
 response example:
 ```json
 {
@@ -81,9 +81,9 @@ response example:
    ]
 }
 ```
-3. GET "/repo-stars" -> json
-fetching all the data required in section 2 of the requirements
-On your terminal: curl "http://localhost:9090/repo-stars"
+3. GET "/repo-stars" -> json <br />
+fetching all the data required in section 2 of the requirements <br />
+On your terminal: curl "http://localhost:9090/repo-stars" <br />
 response example:
 ```json
 {
