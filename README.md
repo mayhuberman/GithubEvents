@@ -16,8 +16,8 @@
 
 # How to run my app
 On your terminal
-1. docker build -t myapp-image .
-2. docker run -p 9090:8080 myapp-image
+1. "docker build -t myapp-image ."
+2. "docker run -p 9090:8080 myapp-image"
 now you have the periodically task running in the backround
 
 # API Documentation
