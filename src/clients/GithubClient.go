@@ -10,7 +10,7 @@ import (
 
 func GetEvents() []models.Event {
 	log.Println("Getting events from Github API")
-	url := "https://api.github.com/events"
+	url := "https://api.github.com/events?page=1&per_page=100"
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

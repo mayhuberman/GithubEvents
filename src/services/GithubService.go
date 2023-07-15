@@ -27,10 +27,10 @@ func ReturnData(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
 
 	data := map[string]interface{}{
-		"EventTypes": EventTypes,
+		"eventTypes": EventTypes,
 		"actors":     ActorsList.ConvertToSlice(),
 		"urls":       UrlsList.ConvertToSlice(),
-		"Emails":     utils.GetMapKeys(Emails),
+		"emails":     utils.GetMapKeys(Emails),
 	}
 
 	err := json.NewEncoder(w).Encode(data)
